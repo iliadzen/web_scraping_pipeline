@@ -1,0 +1,6 @@
+apache-airflow-providers-amazon==8.27.0
+beautifulsoup4==4.12.3
+langdetect==1.0.9
+pyppeteer==2.0.0
+openai==1.35.10
+linkedin_job_scraper==0.0.2
