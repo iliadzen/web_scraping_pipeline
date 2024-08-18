@@ -1,14 +1,13 @@
 # Overview
-This document outlines a data pipeline example for web scraping 🕸️🌐  
+This repo contains a pipeline example for web scraping 🕸️🌐  
+Open positions from LinkedIn job search page are extracted and saved into a database in this example.
 The key feature of this pipeline is the **parallelization** of the extraction tasks, applying the MapReduce pattern  🗺️📉  
-The map step leverages **dynamic parameters** to distribute the workload across multiple tasks, thereby accelerating the web scraping process ⚡🚀
+The map step leverages **dynamic parameters** (variables) to distribute the workload across multiple tasks, thereby accelerating the web scraping process ⚡🚀
 
 ## Solution
 - **Airflow**: for task orchestration, utilizing the TaskFlow API
 - **MinIO**: a local S3 storage for intermediate results, where JSON files from each extract task instance are stored. Alternatively, AWS S3 can be used since the pipeline leverages the Airflow's S3 hook
 - **PostgreSQL**: a Data Warehouse to store the extracted job data
-
-
 
 ## Dynamic Task Mapping
 Airflow supports dynamic task generation.  
