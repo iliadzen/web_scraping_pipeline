@@ -16,8 +16,10 @@ In this example, the DAG consists of 4 steps, with the `extract_jobs` task dynam
 
 ### DAG tasks
 ![DAG tasks](docs/images/DAG_tasks.png)
-- init
-- map_search_tasks - to split the input variables ()
+- init - to create a database table and S3 bucket if not exist
+- map_search_tasks - to map the input variables as a Cartesian product of *locations* and *keywords_list* into multiple tasks
+- extract_jobs - dynamic number of tasks to scrape jobs from LiknedIn, results from each taks instance are stored in MinIO as JSON files
+- load_jobs - to reduce multiple extraction results and save unique jobs in PostgreSQL
 
 ### MapReduce visualization
 ![MapReduce](docs/images/MapReduce.svg)
