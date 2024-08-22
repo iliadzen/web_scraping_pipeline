@@ -1,23 +1,24 @@
 # Overview
 This repo contains a pipeline example for web scraping 🕸️🌐  
-Open positions from LinkedIn job search page are extracted and saved into a database in this example.
-The key feature of this pipeline is the **parallelization** of the extraction tasks, applying the MapReduce pattern  🗺️📉  
-The map step leverages **dynamic parameters** (variables) to distribute the workload across multiple tasks, thereby accelerating the web scraping process ⚡🚀
+The key feature of this pipeline - **scalability**, achieved by splitting the extraction process into multiple parallel tasks with MapReduce pattern  🗺️📉  
+The map step leverages **dynamic parameters** (variables) to distribute the workload across multiple tasks and accelerate the web scraping process ⚡🚀
+In this example, I extract open positions from the LinkedIn search page and load them into a database.
 
 ## Solution
 - **Airflow**: for task orchestration, utilizing the TaskFlow API
 - **MinIO**: a local S3 storage for intermediate results, where JSON files from each extract task instance are stored. Alternatively, AWS S3 can be used since the pipeline leverages the Airflow's S3 hook
 - **PostgreSQL**: a Data Warehouse to store the extracted job data
+- **[linkedin_job_scraper](https://github.com/iliadzen/linkedin_job_scraper)** - my own package for scraping open positions from LinkedIn
 
 ## Dynamic Task Mapping
-Airflow supports dynamic task generation.  
-In this example, the DAG consists of 4 steps, with the `extract_jobs` task dynamically mapped into multiple parallel tasks.
+Airflow recently introduced dynamic task generation.  
+In this example, the DAG consists of 4 steps, with the `extract_jobs` dynamically mapped into multiple parallel tasks.
 
 ### DAG tasks
 ![DAG tasks](docs/images/DAG_tasks.png)
 - init - to create a database table and S3 bucket if not exist
 - map_search_tasks - to map the input variables as a Cartesian product of *locations* and *keywords_list* into multiple tasks
-- extract_jobs - dynamic number of tasks to scrape jobs from LiknedIn, results from each taks instance are stored in MinIO as JSON files
+- extract_jobs - dynamic number of tasks to scrape jobs from LiknedIn, results from each task instance are stored in MinIO as JSON files
 - load_jobs - to reduce multiple extraction results and save unique jobs in PostgreSQL
 
 ### MapReduce visualization
