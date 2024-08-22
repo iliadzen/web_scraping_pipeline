@@ -1,7 +1,7 @@
 # Overview
 This repo contains a pipeline example for web scraping 🕸️🌐  
 The key feature of this pipeline - **scalability**, achieved by splitting the extraction process into multiple parallel tasks with MapReduce pattern  🗺️📉  
-The map step leverages **dynamic parameters** (variables) to distribute the workload across multiple tasks and accelerate the web scraping process ⚡🚀
+The map step leverages **dynamic parameters** (variables) to distribute the workload across multiple tasks and accelerate the web scraping process ⚡🚀  
 In this example, I extract open positions from the LinkedIn search page and load them into a database.
 
 ## Solution
